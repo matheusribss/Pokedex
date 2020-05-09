@@ -13,7 +13,7 @@ const jogador3 = new Jogador ("Marcela Eldourado","Sapatão", "A-")
 
 
 
-server.get("/jogador",(requisicao,resposta)=>resposta.send(`${jogador1.verStatusJogador()}`))
+server.get("/jogador",(requisicao,resposta)=>resposta.send(jogador1))
 
 
 
