@@ -6,11 +6,20 @@
   "dependencies": {
     "express": "^4.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
   "scripts": {
     "test": "jest",
     "debug": "node src/index.js"
   },
+  
+  "Jest":{
+    "globalSetup": "./tests/jest/globalSetup.js",
+    "globalTeardown": "./tests/jest/globalTeardown.js"
+
+  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matheusribss/Pokedex.git"
