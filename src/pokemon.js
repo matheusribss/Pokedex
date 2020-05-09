@@ -8,28 +8,29 @@ class Pokemon{
         this.tipo = tipo
     }
 
-    usarPoder(nome){
+    usarPoder(poder){
 
-        if (this.estaVivo==true){
-            console.log (`to usando o ${nome}`)
+        if (this.vida <= 0){
+            this.estaVivo = false
+        }
+        
 
-        }else{
-            console.log ("pokemon ta morto")
-        } 
+
+        if (this.estaVivo && poder!== null){
+            
+            return 100
+        }
+
+            return null
+     
     }
+
 
     verStatus(){
         return `nome: ${this.nome},vida: ${this.vida}, ataque: ${this.ataque}, estaVivo: ${this.estaVivo}`
     }
 
 
-    checarVida(){
-        if (this.vida > 0){
-            this.estaVivo = true
-        }else{
-            this.estaVivo = false
-        }
-    }
     
 }
 
