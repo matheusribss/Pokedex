@@ -11,7 +11,7 @@ test ("deveria criar um pokemon",()=>{
     
     expect (esboco.vida).toBe(100)
     expect (esboco.estaVivo).toBeTruthy()
-    expect (esboco2.nome).toBeUndefined()
+    expect (esboco2.nome).toBe("")
 
 })
 
@@ -32,3 +32,4 @@ test ("deveria ver status", ()=>{
 
     expect (esboco.verStatus()).not.toBeUndefined()
 })
+

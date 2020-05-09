@@ -1,6 +1,6 @@
 class Pokemon{
 
-    constructor(nome,ataque,tipo){
+    constructor(nome="",ataque=50,tipo="fogo"){
         this.nome = nome
         this.vida = 100
         this.ataque = ataque
