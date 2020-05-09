@@ -2,6 +2,8 @@ class Jogo{
 
     jogar(pokemon1,pokemon2){
 
+        
+
         return `
         rinha começou 
         
