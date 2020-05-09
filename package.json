@@ -1,0 +1,24 @@
+{
+  "name": "pokemon",
+  "version": "1.0.0",
+  "description": "pokemon",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest",
+    "debug": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheusribss/Pokedex.git"
+  },
+  "author": "Matheus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheusribss/Pokedex/issues"
+  },
+  "homepage": "https://github.com/matheusribss/Pokedex#readme"
+}
