@@ -1,34 +1,48 @@
 const express = require("express")
-const Jogo = require ("./jogo")
-const Pokemon = require("./pokemon") 
-const Jogador = require ("./jogador")
+const Jogo = require ("./models/jogo")
+const Pokemon = require("./models/pokemon") 
+const Jogador = require ("./models/jogador")
 
 const server = express()
 const port = 3000
+server.use(express.json())
 
 
-const jogador1 = new Jogador ("Frejat", "Gayzinho" , "O-")
-const jogador2 = new Jogador ("Roberto", "Traveco", "B+")
-const jogador3 = new Jogador ("Marcela Eldourado","Sapatão", "A-")
+const pokemons = [
+
+
+  new Pokemon ("bocao", 99999),
+  new Pokemon ("agahmenon", 10),
+  new Pokemon ("morcego mijão",70)
+
+]
+
+
+const jogadores  = [
+
+     new Jogador ("Frejat", "Gayzinho" , "O-"),
+     new Jogador ("Roberto", "Traveco", "B+"),
+     new Jogador ("Marcela Eldourado","Sapatão", "A-")
+  
+  ]
 
 
 
-server.get("/jogador",(requisicao,resposta)=>resposta.send(jogador1))
+server.get("/jogadores",(requisicao,resposta)=>resposta.send(jogadores))
 
-
-
-
-const bocao = new Pokemon ("bocao", 99999)
-const pokemon3 = new Pokemon ("agahmenon", 10)
-const pokemon2 = new Pokemon ("morcego mijão",70)
 
 const jogo = new Jogo ()
 
 server.get("/jogar",(requisicao,resposta)=>resposta.send(`${jogo.jogar(bocao,pokemon2)}`))
 
 
+server.post("/pokemons",function (requisicao,resposta){
+    pokemons.push(new Pokemon(requisicao.body.nome))
+    resposta.send(200)
+})
 
-server.get("/oi",(requisicao,resposta)=>resposta.send("Oi"))
+
+server.get("/pokemons",(requisicao,resposta)=>resposta.send(pokemons))
 
 
 function startServer (){

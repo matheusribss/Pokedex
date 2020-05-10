@@ -1,4 +1,4 @@
-const Pokemon = require("../src/pokemon") 
+const Pokemon = require("../src/models/pokemon") 
 
 const esboco= new Pokemon ("agahmenon", 10)
 
