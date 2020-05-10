@@ -13,13 +13,10 @@
     "test": "jest",
     "debug": "node src/index.js"
   },
-  
-  "Jest":{
+  "Jest": {
     "globalSetup": "./tests/jest/globalSetup.js",
     "globalTeardown": "./tests/jest/globalTeardown.js"
-
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matheusribss/Pokedex.git"

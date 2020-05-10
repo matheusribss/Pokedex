@@ -1,5 +1,5 @@
-const Pokemon = require("../src/pokemon") 
-const Jogador = require("../src/jogador") 
+const Pokemon = require("../src/models/pokemon") 
+const Jogador = require("../src/models/jogador") 
 
 
 
