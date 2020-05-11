@@ -1,17 +1,27 @@
 class Jogo {
-  jogar(pokemon1, pokemon2) {
-    return `
-        rinha começou 
-        
-        -----   000000
-
-        ${pokemon1.verStatus()}
-
-        -----   000000
-
-        ${pokemon2.verStatus()}
-        `;
+  constructor(
+    jogadores = [],
+  ){
+    this.jogadores = jogadores
   }
+ 
+  rodada(jogador,indexPokemon,poder,desafiante,indexPokemonDesafiante,poderDesafiante){
+
+    const pokemon = jogador.pokemons[indexPokemon]
+
+    const dano = pokemon.usarPoder(poder)
+
+    const inimigo = desafiante.pokemons[indexPokemonDesafiante]
+
+
+    const danoDesafiante = inimigo.usarPoder(poderDesafiante)
+
+    pokemon.vida = pokemon.vida - danoDesafiante
+
+    inimigo.vida = inimigo.vida - dano
+
+  }
+
 }
 
 module.exports = Jogo;
