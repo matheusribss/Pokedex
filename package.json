@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "jest",
-    "debug": "node src/index.js"
+    "debug": "node src/index.js",
+    "prettier": "npx prettier --write ."
   },
   "Jest": {
     "globalSetup": "./tests/jest/globalSetup.js",

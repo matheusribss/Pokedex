@@ -21,11 +21,10 @@ const jogadores = [
 
 server.get("/jogadores", (requisicao, resposta) => resposta.send(jogadores));
 
-const jogo = new Jogo();
-
-server.get("/jogar", (requisicao, resposta) =>
-  resposta.send(`${jogo.jogar(bocao, pokemon2)}`)
-);
+server.post("/jogadores", function (requisicao, resposta) {
+  jogadores.push(new Jogador(requisicao.body.nome));
+  resposta.send(200);
+});
 
 server.post("/pokemons", function (requisicao, resposta) {
   pokemons.push(new Pokemon(requisicao.body.nome));
