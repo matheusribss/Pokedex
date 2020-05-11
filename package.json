@@ -7,11 +7,13 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5"
   },
   "scripts": {
     "test": "jest",
-    "debug": "node src/index.js"
+    "debug": "node src/index.js",
+    "prettier": "npx prettier --write ."
   },
   "Jest": {
     "globalSetup": "./tests/jest/globalSetup.js",
