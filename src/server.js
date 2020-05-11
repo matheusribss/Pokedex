@@ -2,6 +2,7 @@ const express = require("express");
 const Jogo = require("./models/jogo");
 const Pokemon = require("./models/pokemon");
 const Jogador = require("./models/jogador");
+const criarJogador = require("./handlers/jogador");
 
 const server = express();
 const port = 3000;
@@ -21,10 +22,7 @@ const jogadores = [
 
 server.get("/jogadores", (requisicao, resposta) => resposta.send(jogadores));
 
-server.post("/jogadores", function (requisicao, resposta) {
-  jogadores.push(new Jogador(requisicao.body.nome));
-  resposta.send(200);
-});
+server.post("/jogadores", criarJogador);
 
 server.post("/pokemons", function (requisicao, resposta) {
   pokemons.push(new Pokemon(requisicao.body.nome));
