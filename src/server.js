@@ -1,56 +1,41 @@
-const express = require("express")
-const Jogo = require ("./models/jogo")
-const Pokemon = require("./models/pokemon") 
-const Jogador = require ("./models/jogador")
+const express = require("express");
+const Jogo = require("./models/jogo");
+const Pokemon = require("./models/pokemon");
+const Jogador = require("./models/jogador");
 
-const server = express()
-const port = 3000
-server.use(express.json())
-
+const server = express();
+const port = 3000;
+server.use(express.json());
 
 const pokemons = [
+  new Pokemon("bocao", 99999),
+  new Pokemon("agahmenon", 10),
+  new Pokemon("morcego mijão", 70),
+];
 
+const jogadores = [
+  new Jogador("Frejat", "Gayzinho", "O-"),
+  new Jogador("Roberto", "Traveco", "B+"),
+  new Jogador("Marcela Eldourado", "Sapatão", "A-"),
+];
 
-  new Pokemon ("bocao", 99999),
-  new Pokemon ("agahmenon", 10),
-  new Pokemon ("morcego mijão",70)
+server.get("/jogadores", (requisicao, resposta) => resposta.send(jogadores));
 
-]
+const jogo = new Jogo();
 
+server.get("/jogar", (requisicao, resposta) =>
+  resposta.send(`${jogo.jogar(bocao, pokemon2)}`)
+);
 
-const jogadores  = [
+server.post("/pokemons", function (requisicao, resposta) {
+  pokemons.push(new Pokemon(requisicao.body.nome));
+  resposta.send(200);
+});
 
-     new Jogador ("Frejat", "Gayzinho" , "O-"),
-     new Jogador ("Roberto", "Traveco", "B+"),
-     new Jogador ("Marcela Eldourado","Sapatão", "A-")
-  
-  ]
+server.get("/pokemons", (requisicao, resposta) => resposta.send(pokemons));
 
-
-
-server.get("/jogadores",(requisicao,resposta)=>resposta.send(jogadores))
-
-
-const jogo = new Jogo ()
-
-server.get("/jogar",(requisicao,resposta)=>resposta.send(`${jogo.jogar(bocao,pokemon2)}`))
-
-
-server.post("/pokemons",function (requisicao,resposta){
-    pokemons.push(new Pokemon(requisicao.body.nome))
-    resposta.send(200)
-})
-
-
-server.get("/pokemons",(requisicao,resposta)=>resposta.send(pokemons))
-
-
-function startServer (){
-    server.listen(port,()=>console.log("Server Rodando"))
+function startServer() {
+  server.listen(port, () => console.log("Server Rodando"));
 }
 
-
-
-module.exports = startServer
-
-
+module.exports = startServer;
