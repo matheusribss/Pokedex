@@ -1,35 +1,25 @@
 const express = require("express");
-const Jogo = require("./models/jogo");
-const Pokemon = require("./models/pokemon");
-const Jogador = require("./models/jogador");
-const criarJogador = require("./handlers/jogador");
+const criarJogador = require("./handlers/jogador").criarJogador
+const pegarJogador = require("./handlers/jogador").pegarJogador
+const criarJogo = require("./handlers/jogo");
+const criarPokemon = require("./handlers/pokemons").criarPokemon
+const pegarPokemon = require("./handlers/pokemons").pegarPokemon
+
 
 const server = express();
 const port = 3000;
 server.use(express.json());
 
-const pokemons = [
-  new Pokemon("bocao", 99999),
-  new Pokemon("agahmenon", 10),
-  new Pokemon("morcego mijão", 70),
-];
 
-const jogadores = [
-  new Jogador("Frejat", "Gayzinho", "O-"),
-  new Jogador("Roberto", "Traveco", "B+"),
-  new Jogador("Marcela Eldourado", "Sapatão", "A-"),
-];
-
-server.get("/jogadores", (requisicao, resposta) => resposta.send(jogadores));
+server.get("/jogadores", pegarJogador);
 
 server.post("/jogadores", criarJogador);
 
-server.post("/pokemons", function (requisicao, resposta) {
-  pokemons.push(new Pokemon(requisicao.body.nome));
-  resposta.send(200);
-});
+server.post("/pokemons", criarPokemon);
 
-server.get("/pokemons", (requisicao, resposta) => resposta.send(pokemons));
+server.get("/pokemons", pegarPokemon);
+
+server.post("/jogos",criarJogo)
 
 function startServer() {
   server.listen(port, () => console.log("Server Rodando"));
