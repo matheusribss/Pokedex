@@ -1,8 +1,25 @@
-const Jogo = require("../models/jogo");
+const pokemons = require("../data").pokemons;
+const jogadores = require("../data").jogadores;
+const jogo = require("../data").jogo;
 
 function criarJogo(requisicao, resposta) {
-    console.log(requisicao.body.pokemons);
-    resposta.send(200);
-  }
+  console.log(requisicao.body.pokemons);
+  resposta.send(200);
+}
 
-  module.exports = criarJogo;
+function rodada(requisicao, resposta) {
+  const rodada = jogo.rodada(
+    jogadores[0],
+    0,
+    "dando jets",
+    jogadores[1],
+    0,
+    "pauladinha"
+  );
+  resposta.send(rodada);
+}
+
+module.exports = {
+  criarJogo,
+  rodada,
+};

@@ -1,10 +1,11 @@
 class Pokemon {
-  constructor(nome = "", ataque = 50, tipo = "fogo") {
+  constructor(nome = "", ataque = 50, tipo = "fogo", poderes = []) {
     this.nome = nome;
     this.vida = 100;
     this.ataque = ataque;
     this.estaVivo = true;
     this.tipo = tipo;
+    this.poderes = [];
   }
 
   usarPoder(poder) {
@@ -12,11 +13,19 @@ class Pokemon {
       this.estaVivo = false;
     }
 
-    if (this.estaVivo && poder !== null) {
-      return 100;
+    for (i = 0; i < this.poderes.length; i++) {
+      if (this.poderes[i].nome == poder) {
+        if (this.estaVivo && poder !== null) {
+          return poder.dano;
+        }
+      }
     }
 
     return null;
+  }
+
+  sofrerDano(dano) {
+    this.vida = this.vida - dano;
   }
 
   verStatus() {
