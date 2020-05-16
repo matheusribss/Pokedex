@@ -7,19 +7,19 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.5"
   },
   "scripts": {
     "test": "jest",
-    "debug": "node src/index.js"
+    "debug": "npx nodemon src/index.js",
+    "prettier": "npx prettier --write ."
   },
-  
-  "Jest":{
+  "Jest": {
     "globalSetup": "./tests/jest/globalSetup.js",
     "globalTeardown": "./tests/jest/globalTeardown.js"
-
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matheusribss/Pokedex.git"
