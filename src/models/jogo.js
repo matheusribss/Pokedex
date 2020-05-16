@@ -1,50 +1,93 @@
 class Jogo {
   constructor(jogadores = []) {
-    this.jogadores = jogadores;
-    this.temGanhador = true;
+    this.temGanhador = false;
     this.rodadas = [];
+    this.mestreGinasio = jogadores[0];
+    this.desafiante = jogadores[1];
+    this.pokemonDesafiante = null;
+    this.pokemonMestreGinasio = null;
+    this.ganhador = "mestre";
+  }
+
+  setarPokemon(indexPokemonDesafiante, indexPokemonMestre) {
+    //DEFININDO OS POKEMONS
+    this.pokemonMestreGinasio = this.mestreGinasio.pokemons[indexPokemonMestre];
+    this.pokemonDesafiante = this.desafiante.pokemons[indexPokemonDesafiante];
+  }
+
+  calcularDano(indexPoderDesafiante, indexPoderMestreGinasio) {
+    const poderDesafiante = this.pokemonDesafiante.poderes[indexPoderDesafiante]
+      .nome;
+
+    console.log(poderDesafiante);
+
+    const danoDesafiante = this.pokemonDesafiante.usarPoder(poderDesafiante);
+
+    const poderMestreGinasio = this.pokemonMestreGinasio.poderes[
+      indexPoderMestreGinasio
+    ].nome;
+
+    const danoMestredoGinasio = this.pokemonMestreGinasio.usarPoder(
+      poderMestreGinasio
+    );
+
+    return {
+      danoDesafiante: danoDesafiante,
+      danoMestredoGinasio: danoMestredoGinasio,
+    };
+  }
+
+  verificarGanhador() {
+    var countPokemonsDesafianteMortos = 0;
+    var countPokemonsMestreMortos = 0;
+
+    this.desafiante.pokemons.forEach((pokemon) => {
+      if (!pokemon.estaVivo) {
+        countPokemonsDesafianteMortos++;
+      }
+    });
+
+    this.mestreGinasio.pokemons.forEach((pokemon) => {
+      if (!pokemon.estaVivo) {
+        countPokemonsMestreMortos++;
+      }
+    });
+
+    if (countPokemonsDesafianteMortos >= this.desafiante.pokemons.length) {
+      this.temGanhador = true;
+      return;
+    }
+
+    if (countPokemonsMestreMortos >= this.mestreGinasio.pokemons.length) {
+      this.temGanhador = true;
+      this.ganhador = "desafiante";
+    }
   }
 
   rodada(
-    jogador,
-    indexPokemon,
-    poder,
-    desafiante,
     indexPokemonDesafiante,
-    poderDesafiante
+    indexPokemonMestre,
+    indexPoderDesafiante,
+    indexPoderMestreGinasio
   ) {
-    var rodada = {
-      pokemonVida: null,
-      inimigoVida: null,
-      dano: null,
-      danoDesafiante: null,
-      temGanhador: this.temGanhador,
-    };
-
     if (!this.temGanhador) {
-      const pokemon = jogador.pokemons[indexPokemon];
+      this.setarPokemon(indexPokemonDesafiante, indexPokemonMestre);
+      const logDano = this.calcularDano(
+        indexPoderDesafiante,
+        indexPoderMestreGinasio
+      );
 
-      const dano = pokemon.usarPoder(poder);
+      console.log(logDano);
+      this.verificarGanhador();
 
-      const inimigo = desafiante.pokemons[indexPokemonDesafiante];
-
-      const danoDesafiante = inimigo.usarPoder(poderDesafiante);
-
-      pokemon.sofrerDano(danoDesafiante);
-      inimigo.sofrerDano(dano);
-
-      rodada = JSON.stringify({
-        pokemonVida: pokemon.vida,
-        inimigoVida: inimigo.vida,
-        dano: dano,
-        danoDesafiante: danoDesafiante,
-        rodadas: this.rodadas,
-      });
+      const rodada = {
+        pokemonDesafiante: this.pokemonDesafiante,
+        pokemonMestreGinasio: this.pokemonMestreGinasio,
+        dano: logDano,
+      };
 
       this.rodadas.push(rodada);
     }
-
-    return rodada;
   }
 }
 
