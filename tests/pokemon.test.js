@@ -11,8 +11,6 @@ test("deveria criar um pokemon", () => {
 });
 
 test("deveria usar poder", () => {
-  expect(esboco.usarPoder("paulada")).toBe(100);
-
   expect(esboco.usarPoder(null)).toBeNull();
 
   esboco.vida = 0;

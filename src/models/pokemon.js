@@ -1,22 +1,37 @@
 class Pokemon {
-  constructor(nome = "", ataque = 50, tipo = "fogo") {
+  constructor(nome = "", ataque = 50, poderes = []) {
     this.nome = nome;
     this.vida = 100;
     this.ataque = ataque;
     this.estaVivo = true;
-    this.tipo = tipo;
+    this.poderes = poderes;
   }
 
   usarPoder(poder) {
-    if (this.vida <= 0) {
-      this.estaVivo = false;
-    }
+    this.verificarVida();
 
-    if (this.estaVivo && poder !== null) {
-      return 100;
+    for (var i = 0; i < this.poderes.length; i++) {
+      if (this.poderes[i].nome == poder) {
+        if (this.estaVivo && poder !== null) {
+          const dano = this.poderes[i].dano * this.ataque;
+
+          return dano;
+        }
+      }
     }
 
     return null;
+  }
+
+  verificarVida() {
+    if (this.vida <= 0) {
+      this.estaVivo = false;
+    }
+  }
+
+  sofrerDano(dano) {
+    this.vida = this.vida - dano;
+    this.verificarVida();
   }
 
   verStatus() {
